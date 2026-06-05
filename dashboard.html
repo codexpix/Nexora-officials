@@ -239,6 +239,31 @@ if (profileForm) {
                 console.error("Formspree error occurred.");
             }
         })
-        .catch(error => console.error("Network error:", error));
+                    .catch(error => console.error("Network error:", error));
+        });
+    }
+
+    // --- YEH WALA HISSAs ADD KAREIN ---
+    window.redirectToHome = function() { 
+        window.location.href = 'index.html'; 
+    }
+    
+    window.closeAdvertiserModal = function() {
+        document.getElementById('advertiser-modal').classList.remove('modal-active');
+        document.getElementById('adv-content').classList.remove('modal-content-active');
+    }
+
+    window.openAdvertiserModal = function() {
+        const advModal = document.getElementById('advertiser-modal');
+        const advContent = document.getElementById('adv-content');
+        if (advModal && advContent) {
+            advModal.classList.add('modal-active');
+            advContent.classList.add('modal-content-active');
+        }
+    }
+</script>
+</body>
+</html>
+
     });
 }
