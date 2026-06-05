@@ -212,22 +212,33 @@
         }
 
         const profileForm = document.getElementById('member-profile-form');
-        if (profileForm) {
-            profileForm.addEventListener('submit', function() {
-                const token = "NEX-" + Math.floor(100000 + Math.random() * 900000);
-                document.getElementById('display-token').textContent = token;
-                document.getElementById('token-modal').classList.add('modal-active');
-                document.getElementById('token-content').classList.add('modal-content-active');
-            });
-        }
-
-        window.redirectToHome = function() { window.location.href = 'index.html'; }
-        window.closeAdvertiserModal = function() {
-            document.getElementById('advertiser-modal').classList.remove('modal-active');
-            document.getElementById('adv-content').classList.remove('modal-content-active');
-        }
-    </script>
-</body>
-</html>
-
-            
+if (profileForm) {
+    profileForm.addEventListener('submit', function(e) {
+        // 1. Pehle default submit ko rokenge taaki modal dikhe
+        e.preventDefault(); 
+        
+        // 2. Token generate aur modal show karenge
+        const token = "NEX-" + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById('display-token').textContent = token;
+        document.getElementById('token-modal').classList.add('modal-active');
+        document.getElementById('token-content').classList.add('modal-content-active');
+        
+        // 3. Ek chota sa form data banakar Formspree ko background mein bhej denge (AJAX)
+        const formData = new FormData(profileForm);
+        fetch(profileForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log("Formspree checked: Data sent successfully!");
+            } else {
+                console.error("Formspree error occurred.");
+            }
+        })
+        .catch(error => console.error("Network error:", error));
+    });
+}
