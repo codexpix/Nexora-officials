@@ -14,12 +14,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        background: '#000000',
-                        foreground: '#ffffff',
-                        border: '#1a1a1a',
-                        muted: '#a3a3a3'
-                    }
+                    colors: { background: '#000000', foreground: '#ffffff', border: '#1a1a1a', muted: '#a3a3a3' }
                 }
             }
         }
@@ -44,23 +39,12 @@
         .modal-active { opacity: 1 !important; pointer-events: auto !important; backdrop-filter: blur(16px); }
         .modal-content-active { transform: scale(1) translateY(0) !important; opacity: 1 !important; }
         input, select, textarea { font-size: 16px !important; }
-        
-        /* Dropdown styles for profile picture */
-        .dropdown-menu {
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease-out;
-        }
-        .dropdown-menu.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+        .dropdown-menu { opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease-out; }
+        .dropdown-menu.active { opacity: 1; visibility: visible; transform: translateY(0); }
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
-<div id="intro-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white transition-opacity duration-700">
+        <div id="intro-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white transition-opacity duration-700">
         <img src="logo.jpg" alt="NEXORA" class="w-48 md:w-80 logo-anim rounded-full border border-gray-800 object-cover">
     </div>
 
@@ -75,12 +59,8 @@
                 <a href="index.html#services" class="hover:text-white transition">Services</a>
                 <a href="index.html#contact" class="hover:text-white transition">Contact</a>
             </div>
-            
-            <!-- User Profile/Sign Out or Join Community -->
             <div class="relative">
-                <button id="auth-button" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-black text-xs sm:text-sm font-semibold rounded-full hover:scale-105 transition-transform hidden">
-                    Join Community
-                </button>
+                <button id="auth-button" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-black text-xs sm:text-sm font-semibold rounded-full hover:scale-105 transition-transform hidden">Join Community</button>
                 <div id="user-profile-menu" class="hidden">
                     <img id="user-photo" src="" alt="Profile" class="w-10 h-10 rounded-full cursor-pointer border-2 border-transparent hover:border-white transition-all" onclick="toggleDropdown()">
                     <div id="dropdown" class="absolute right-0 mt-2 w-48 bg-[#050505] border border-[#222] rounded-md shadow-lg py-1 z-50 dropdown-menu">
@@ -95,12 +75,8 @@
     <main id="main-content" class="max-w-7xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 hidden">
         <section class="min-h-[85vh] flex flex-col items-center justify-center text-center relative reveal">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-white/[0.03] rounded-full blur-3xl -z-10 pointer-events-none"></div>
-            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter leading-tight max-w-5xl px-2">
-                We Make Your Dreams Into Reality.
-            </h1>
-            <p class="mt-6 text-base sm:text-lg md:text-xl text-muted max-w-2xl font-light px-4">
-                Become a Member of Our Services for Free. Earn by Your Skills.
-            </p>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter leading-tight max-w-5xl px-2">We Make Your Dreams Into Reality.</h1>
+            <p class="mt-6 text-base sm:text-lg md:text-xl text-muted max-w-2xl font-light px-4">Become a Member of Our Services for Free. Earn by Your Skills.</p>
         </section>
 
         <section id="onboarding-form-section" class="py-20 sm:py-32 border-t border-border reveal">
@@ -111,25 +87,15 @@
                     <input type="text" name="fullName" id="form-full-name" placeholder="Full Name" required class="w-full p-3 sm:p-4 rounded-xl border border-[#222] bg-black focus:outline-none focus:border-white transition-colors font-light">
                     <input type="number" name="age" placeholder="Age" required class="w-full p-3 sm:p-4 rounded-xl border border-[#222] bg-black focus:outline-none focus:border-white transition-colors font-light">
                     <textarea name="skills" placeholder="Your Skills (e.g., Web Development, Video Editing, UI/UX Design)" rows="4" required class="w-full p-3 sm:p-4 rounded-xl border border-[#222] bg-black focus:outline-none focus:border-white transition-colors font-light resize-none"></textarea>
-                    <!-- Hidden field for user's email, filled by JS -->
                     <input type="hidden" name="_replyto" id="hidden-reply-to-email">
                     <button type="submit" id="profile-submit-btn" class="w-full py-3.5 sm:py-4 bg-white text-black rounded-xl font-semibold hover:bg-gray-200 transition-colors">Submit Profile</button>
                 </form>
             </div>
         </section>
 
-        <!-- Placeholder for About and Services to maintain structure if needed -->
-        <section id="about" class="py-20 sm:py-32 border-t border-border reveal hidden">
-            <!-- Content will be hidden, but anchors maintained for consistent navigation -->
-        </section>
-
-        <section id="services" class="py-20 sm:py-32 border-t border-border reveal hidden">
-            <!-- Content will be hidden -->
-        </section>
-
-        <section id="contact" class="py-20 sm:py-32 border-t border-border reveal hidden">
-             <!-- Content will be hidden -->
-        </section>
+        <section id="about" class="py-20 sm:py-32 border-t border-border reveal hidden"></section>
+        <section id="services" class="py-20 sm:py-32 border-t border-border reveal hidden"></section>
+        <section id="contact" class="py-20 sm:py-32 border-t border-border reveal hidden"></section>
     </main>
 
     <footer class="border-t border-border py-12 text-center text-muted text-sm bg-black px-4">
@@ -141,7 +107,6 @@
         <p class="opacity-40">&copy; 2026 Nexora Agency. All rights reserved.</p>
     </footer>
 
-    <!-- Token Confirmation Modal -->
     <div id="token-modal" class="fixed inset-0 z-50 bg-black/70 opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4 backdrop-blur-sm">
         <div id="token-content" class="bg-[#050505] border border-[#222] rounded-3xl p-6 sm:p-10 max-w-md w-[95%] sm:w-full transform scale-95 translate-y-10 opacity-0 transition-all duration-500 relative text-center">
             <h2 class="text-2xl font-semibold tracking-tight mb-4">Profile Submitted!</h2>
@@ -152,7 +117,6 @@
         </div>
     </div>
 
-    <!-- Advertiser Modal (copied from index.html, hidden by default unless explicitly called) -->
     <div id="advertiser-modal" class="fixed inset-0 z-50 bg-black/70 opacity-0 pointer-events-none transition-all duration-500 flex items-center justify-center p-4 backdrop-blur-sm">
         <div id="adv-content" class="bg-[#050505] border border-[#222] rounded-3xl p-6 sm:p-10 max-w-2xl w-[95%] sm:w-full transform scale-95 translate-y-10 opacity-0 transition-all duration-500 relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeAdvertiserModal()" class="absolute top-4 right-4 sm:top-6 sm:right-6 text-gray-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
@@ -168,13 +132,102 @@
                 <button type="submit" id="adv-submit-btn" class="w-full py-3.5 sm:py-4 bg-white text-black rounded-xl font-semibold hover:bg-gray-200 transition-colors">Submit Inquiry</button>
             </form>
         </div>
-    </div>
-// In your existing index.html, find this part within the signInWithPopup .then() block:
-.then((result) => {
-    alert("Welcome to Nexora, " + result.user.displayName + "!");
-    closeAuthModal();
-    window.location.href = 'dashboard.html'; // ADD THIS LINE
-}).catch((error) => {
-    // ... rest of your error handling
-});
+            </div>
+        <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
+        // Firebase Configuration setup
+        const firebaseConfig = {
+            apiKey: "AIzaSyDajnh8dcckTGYUTe2d0TrBhvXnmFlc64s",
+            authDomain: "nexora-agency-e846d.firebaseapp.com",
+            projectId: "nexora-agency-e846d",
+            storageBucket: "nexora-agency-e846d.firebasestorage.app",
+            messagingSenderId: "61921657246",
+            appId: "1:61921657246:web:4e06b7dc8e0aa565a1f5af"
+        };
+
+        // Initialize Firebase app
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const introLoader = document.getElementById('intro-loader');
+        const mainContent = document.getElementById('main-content');
+        const userProfileMenu = document.getElementById('user-profile-menu');
+        const authButton = document.getElementById('auth-button');
+        const userPhoto = document.getElementById('user-photo');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const hiddenReplyToEmail = document.getElementById('hidden-reply-to-email');
+        const formFullName = document.getElementById('form-full-name');
+
+        // Animation handles
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (introLoader) introLoader.classList.add('fade-out');
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(el => el.classList.add('active'));
+            }, 2000);
+        });
+
+        // Track Login State of the User
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                if (mainContent) mainContent.classList.remove('hidden');
+                if (authButton) authButton.classList.add('hidden');
+                if (userProfileMenu) userProfileMenu.classList.remove('hidden');
+                
+                if (userPhoto) userPhoto.src = user.photoURL || 'https://via.placeholder.com/150';
+                if (userEmailDisplay) userEmailDisplay.textContent = user.email;
+                if (hiddenReplyToEmail) hiddenReplyToEmail.value = user.email;
+                if (formFullName) formFullName.value = user.displayName || '';
+            } else {
+                alert("Security Check: Please login from Home page first.");
+                window.location.href = 'index.html';
+            }
+        });
+
+        window.toggleDropdown = function() {
+            const dropdown = document.getElementById('dropdown');
+            if (dropdown) dropdown.classList.toggle('active');
+        }
+
+        window.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('dropdown');
+            const userPhoto = document.getElementById('user-photo');
+            if (dropdown && userPhoto && !userPhoto.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        const signOutBtn = document.getElementById('sign-out-button');
+        if (signOutBtn) {
+            signOutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                signOut(auth).then(() => {
+                    window.location.href = 'index.html';
+                }).catch((error) => {
+                    console.error("Sign out error: ", error);
+                });
+            });
+        }
+
+        const profileForm = document.getElementById('member-profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', function() {
+                const token = "NEX-" + Math.floor(100000 + Math.random() * 900000);
+                document.getElementById('display-token').textContent = token;
+                document.getElementById('token-modal').classList.add('modal-active');
+                document.getElementById('token-content').classList.add('modal-content-active');
+            });
+        }
+
+        window.redirectToHome = function() { window.location.href = 'index.html'; }
+        window.closeAdvertiserModal = function() {
+            document.getElementById('advertiser-modal').classList.remove('modal-active');
+            document.getElementById('adv-content').classList.remove('modal-content-active');
+        }
+    </script>
+</body>
+</html>
+
+            
