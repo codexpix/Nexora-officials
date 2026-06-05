@@ -280,6 +280,7 @@
                     .then((result) => {
                         alert("Welcome to Nexora, " + result.user.displayName + "!");
                         closeAuthModal();
+                        window.location.href = './dashboard.html';
                     }).catch((error) => {
                         alert("Login Error: " + error.message);
                     });
