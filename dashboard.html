@@ -7,7 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link class="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
         tailwind.config = {
@@ -45,7 +45,6 @@
         .modal-content-active { transform: scale(1) translateY(0) !important; opacity: 1 !important; }
         input, select, textarea { font-size: 16px !important; }
         
-        /* Dropdown styles for profile picture */
         .dropdown-menu {
             opacity: 0;
             visibility: hidden;
@@ -60,7 +59,7 @@
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black">
-<div id="intro-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white transition-opacity duration-700">
+    <div id="intro-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white transition-opacity duration-700">
         <img src="logo.jpg" alt="NEXORA" class="w-48 md:w-80 logo-anim rounded-full border border-gray-800 object-cover">
     </div>
 
@@ -77,7 +76,7 @@
             </div>
             
             <div class="relative">
-                <button id="auth-button" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-black text-xs sm:text-sm font-semibold rounded-full hover:scale-105 transition-transform hidden">
+                <button id="auth-button" class="px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-black text-xs sm:text-sm font-semibold rounded-full hover:scale-105 transition-transform hidden" onclick="window.location.href='index.html'">
                     Join Community
                 </button>
                 <div id="user-profile-menu" class="hidden">
@@ -118,15 +117,6 @@
                 </form>
             </div>
         </section>
-
-        <section id="about" class="py-20 sm:py-32 border-t border-border reveal hidden">
-            </section>
-
-        <section id="services" class="py-20 sm:py-32 border-t border-border reveal hidden">
-            </section>
-
-        <section id="contact" class="py-20 sm:py-32 border-t border-border reveal hidden">
-             </section>
     </main>
 
     <footer class="border-t border-border py-12 text-center text-muted text-sm bg-black px-4">
@@ -167,6 +157,163 @@
             </form>
         </div>
     </div>
-</body>
-</html>
 
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('intro-loader');
+                const mainContent = document.getElementById('main-content');
+                if (loader) {
+                    loader.classList.add('fade-out');
+                    setTimeout(() => loader.style.display = 'none', 800);
+                }
+                if (mainContent) {
+                    mainContent.classList.remove('hidden');
+                    setTimeout(() => revealElements(), 100);
+                }
+            }, 2500);
+        });
+
+        window.addEventListener('scroll', revealElements);
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        function toggleDropdown() {
+            document.getElementById('dropdown').classList.toggle('active');
+        }
+
+        function openAdvertiserModal() {
+            document.getElementById('advertiser-modal').classList.add('modal-active');
+            document.getElementById('adv-content').classList.add('modal-content-active');
+        }
+        
+        function closeAdvertiserModal() {
+            document.getElementById('advertiser-modal').classList.remove('modal-active');
+            document.getElementById('adv-content').classList.remove('modal-content-active');
+        }
+
+        function redirectToHome() {
+            window.location.href = 'index.html';
+        }
+
+        // --- Member Profile Form Submit Handler ---
+        const memberForm = document.getElementById('member-profile-form');
+        const profileBtn = document.getElementById('profile-submit-btn');
+        if (memberForm) {
+            memberForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                profileBtn.innerHTML = 'Sending...';
+                profileBtn.disabled = true;
+                
+                const formData = new FormData(memberForm);
+                
+                try {
+                    const response = await fetch(memberForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        const tokenNum = "NEX-" + Math.floor(100000 + Math.random() * 900000);
+                        document.getElementById('display-token').innerText = tokenNum;
+                        
+                        document.getElementById('token-modal').classList.add('modal-active');
+                        document.getElementById('token-content').classList.add('modal-content-active');
+                        memberForm.reset();
+                    } else {
+                        alert("Oops! Web3Forms submission mein dikkat aayi.");
+                    }
+                } catch (error) {
+                    alert("Network error, kripya internet check karein.");
+                } finally {
+                    profileBtn.innerHTML = 'Submit Profile';
+                    profileBtn.disabled = false;
+                }
+            });
+        }
+
+        // --- Advertiser Form Submit Handler ---
+        const advForm = document.getElementById('adv-form');
+        const advBtn = document.getElementById('adv-submit-btn');
+        if (advForm) {
+            advForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                advBtn.innerHTML = 'Sending...';
+                advBtn.disabled = true;
+                
+                const formData = new FormData(advForm);
+                
+                try {
+                    const response = await fetch(advForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        alert("Thank you! Your request has been successfully sent to Nexora.");
+                        advForm.reset();
+                        closeAdvertiserModal();
+                    } else {
+                        alert("Oops! Verification error occurred.");
+                    }
+                } catch (error) {
+                    alert("Network error, please try again.");
+                } finally {
+                    advBtn.innerHTML = 'Submit Inquiry';
+                    advBtn.disabled = false;
+                }
+            });
+        }
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDajnh8dcckTGYUTe2d0TrBhvXnmFlc64s",
+            authDomain: "nexora-agency-e846d.firebaseapp.com",
+            projectId: "nexora-agency-e846d",
+            storageBucket: "nexora-agency-e846d.firebasestorage.app",
+            messagingSenderId: "619216597246",
+            appId: "1:619216597246:web:4e06b7dc8e0aa565a1f5af"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('auth-button').classList.add('hidden');
+                document.getElementById('user-profile-menu').classList.remove('hidden');
+                document.getElementById('user-photo').src = user.photoURL || "https://www.w3schools.com/howto/img_avatar.png";
+                document.getElementById('user-email-display').innerText = user.email;
+                if(document.getElementById('form-full-name')) {
+                    document.getElementById('form-full-name').value = user.displayName || "";
+                }
+            } else {
+                document.getElementById('auth-button').classList.remove('hidden');
+                document.getElementById('user-profile-menu').classList.add('hidden');
+                alert("Please log in first to view dashboard!");
+                window.location.href = 'index.html';
+            }
+        });
+
+        document.getElementById('sign-out-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            signOut(auth).then(() => {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+        </html>
+        
